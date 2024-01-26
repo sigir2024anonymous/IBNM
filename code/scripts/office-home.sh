@@ -1,0 +1,54 @@
+#!/bin/bash
+python main.py \
+  -a resnet50 \
+  --batch-size 64 \
+  --mlp --aug-plus --cos \
+  --data-A '' \
+  --data-B '' \
+  --gpu 0 \
+  --num_cluster '65' \
+  --warmup-epoch 20 \
+  --temperature 0.2 \
+  --exp-dir './result' \
+  --lr 0.0002 \
+  --clean-model 'moco_v2_800ep_pretrain.pth.tar' \
+  --instcon-weight 1.0 \
+  --cwcon-startepoch 20 \
+  --cwcon-satureepoch 100 \
+  --cwcon-weightstart 0.0 \
+  --cwcon-weightsature 0.5 \
+  --cwcon_filterthresh 0.2 \
+  --epochs 200 \
+  --selfentro-temp 0.01 \
+  --selfentro-weight 1.0 \
+  --selfentro-startepoch 100 \
+  --aug-startepoch 50 \
+  --divide-num 0.8 \
+  --prec_nums '1,5,15' \
+
+python main.py \
+  -a vit \
+  --batch-size 32 \
+  --mlp --aug-plus --cos \
+  --data-A '' \
+  --data-B '' \
+  --gpu 3 \
+  --num_cluster '65' \
+  --warmup-epoch 0 \
+  --temperature 0.2 \
+  --exp-dir './result' \
+  --lr 5e-6 \
+  --clean-model 'dino_vitbase16_pretrain.pth' \
+  --instcon-weight 1.0 \
+  --cwcon-startepoch 0 \
+  --cwcon-satureepoch 10 \
+  --cwcon-weightstart 0.0 \
+  --cwcon-weightsature 0.5 \
+  --cwcon_filterthresh 0.2 \
+  --epochs 50 \
+  --selfentro-temp 0.01 \
+  --selfentro-weight 1.0 \
+  --selfentro-startepoch 0 \
+  --aug-startepoch 50 \
+  --divide-num 0.8 \
+  --prec_nums '1,5,15' \
